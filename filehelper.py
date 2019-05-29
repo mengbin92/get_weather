@@ -1,17 +1,6 @@
 import itchat
 import weather_tools
 
-# itchat.auto_login(True)
-
-#itchat.send('hello filehelper', toUserName='filehelper')
-
-# friends = itchat.get_friends(update=True)
-# for friend in friends:
-#     if friend['NickName'] == 'Gypsy':
-#         itchat.send('What are you 弄啥嘞！', toUserName=friend['UserName'])
-#         print('send msg done')
-# itchat.logout()
-
 
 def send_weather(url):
     # 获取天气信息
