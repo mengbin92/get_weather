@@ -4,15 +4,17 @@ from urllib.request import urlopen
 
 def get_weather(url):
 
-    #url = 'http://www.weather.com.cn/weather/101210402.shtml'
+    # url = 'http://www.weather.com.cn/weather/101210402.shtml'
 
     html = urlopen(url).read().decode('utf-8')
     # print(html)
 
     soup = BeautifulSoup(html, features='lxml')
 
-    today = soup.find('li', attrs={'class': 'sky skyid lv1 on'})
+    today = soup.find('ul', attrs={'class': 't clearfix'})
     # print(today)
+
+    today = today.find('li')
 
     day = today.find('h1').get_text()
     # print(day.get_text())
@@ -24,7 +26,10 @@ def get_weather(url):
     # print(temp.get_text())
 
     windy = today.find('p', {'class': 'win'}).find('em').find_all('span')
-    windy = windy[0]['title']+'转'+windy[1]['title']
+    if len(windy) == 1:
+        windy = windy[0]['title']
+    else:
+        windy = windy[0]['title']+'转'+windy[1]['title']
     # print(windy)
 
     windy_power = today.find('p', {'class': 'win'}).find_all('i')[0].get_text()
